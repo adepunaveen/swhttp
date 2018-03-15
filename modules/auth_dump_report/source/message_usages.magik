@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 #% text_encoding = iso8859_1
 _package mclib
 
 message_handler.new(:auth_dump_plugin).add_use(:xslt_reporter_plugin)
 $
 
+=======
+#% text_encoding = iso8859_1
+_package mclib
+
+message_handler.new(:auth_dump_plugin).add_use(:xslt_reporter_plugin)
+$
+
+>>>>>>> 9ddddecf1821ece6004dae3b228097c08212f05e

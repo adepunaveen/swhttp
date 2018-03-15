@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 mclib_ace_auto_merge		4000
 
 description
@@ -6,4 +7,14 @@ end
 
 requires
 	mclib_package
+=======
+mclib_ace_auto_merge		4000
+
+description
+	Adds a startup procedure that merges the users ACE alternative automatically.
+end
+
+requires
+	mclib_package
+>>>>>>> 9ddddecf1821ece6004dae3b228097c08212f05e
 end

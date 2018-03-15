@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 BODY, TH, TD, P {
 		color: Blue;
 	 }
@@ -6,3 +7,13 @@ A           { color: Black; TEXT-DECORATION: underline; }
 A:visited   { color: Black; TEXT-DECORATION: underline; }
 A:active    { color: Black; TEXT-DECORATION: underline; }
 A:hover     { color: Blue;	}
+=======
+BODY, TH, TD, P {
+		color: Blue;
+	 }
+
+A           { color: Black; TEXT-DECORATION: underline; }
+A:visited   { color: Black; TEXT-DECORATION: underline; }
+A:active    { color: Black; TEXT-DECORATION: underline; }
+A:hover     { color: Blue;	}
+>>>>>>> 9ddddecf1821ece6004dae3b228097c08212f05e
