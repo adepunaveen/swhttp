@@ -1,0 +1,38 @@
+#% text_encoding = iso8859_1
+#
+# Copyright © 2007 iFactor Consulting, Inc. (http://www.ifactorconsulting.com)
+#
+# This software is released under the terms of version 2 of the
+# GNU General Public License.  The full license text is
+# provided in the license.txt file in the Dialog Designer product
+# directory, and is also available at http://www.fsf.org.
+#
+##########################################################################################
+##
+## @author Graham Garlick
+## @version 1.0 (April 2007)
+##
+## PIXEL_BOUNDING_BOX - added functionality for CORE object.
+##
+##########################################################################################
+_package user
+
+
+_pragma(classify_level=restricted, topic={dialog_designer})
+_method pixel_bounding_box.at?(x,y)
+	## 
+	## Quick method for checking if SELF overlaps location XY.
+	## 
+
+	_if _self.xmin <= x _andif
+	    _self.ymin <= y _andif
+	    _self.xmax >= x _andif
+	    _self.ymax >= y
+	_then
+		_return _true 
+	_endif
+
+	>> _false
+_endmethod
+$
+

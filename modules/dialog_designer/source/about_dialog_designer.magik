@@ -1,0 +1,94 @@
+#% text_encoding = iso8859_1
+#
+# Copyright © 2007 iFactor Consulting, Inc. (http://www.ifactorconsulting.com)
+#
+# This software is released under the terms of version 2 of the
+# GNU General Public License.  The full license text is
+# provided in the license.txt file in the Dialog Designer product
+# directory, and is also available at http://www.fsf.org.
+#
+##########################################################################################
+##
+## @author Graham Garlick
+## @version 1.2 (June 2007)
+##
+## About Dialog Designer.  Ship only the magikc file (and a
+## back up copy of the magikc file) to users to prevent
+## tampering, though it would be easy enough to re-define the method.
+##
+##########################################################################################
+_package user
+
+_pragma(classify_level=restricted, usage={redefinable})
+_method dialog_designer.about_dialog_designer()
+	## 
+	## About the Dialog Designer ...
+	
+	txt << write_string("Dialog Designer 1.5 (Jan 2008)",%newline*2,
+			    "Created by : Graham Garlick, iFactor Consulting",%newline*2,
+			    "Email : graham@ifactorconsulting.com",%newline)
+
+	.items[:ws].clipboard_text << "graham@ifactorconsulting.com"
+
+	_self.dd_show_alert(:about_dialog_designer,txt)
+_endmethod
+$
+
+_pragma(classify_level=restricted, usage={redefinable})
+_method dialog_designer.dd_show_alert(title_msg_key,txt)
+	## 
+	## Show a simple alert box, setting the title and text shown.
+
+	_if (fr << .items[title_msg_key]) _is _unset 
+	_then
+		fr << frame.new(_self.message(title_msg_key))
+		rc << rowcol.new(fr,_unset,1,:pixel,:style,:top_level)
+		l << label_item.new(rc,txt)
+		b << button_item.new(rc,_self.message(:ok),fr,:|deactivate()|,
+				     :min_width,70,
+				     :col_alignment,:centre)
+		
+		fr.minimizable? << _false
+		fr.maximizable? << _false
+		fr.resizable? << _false
+
+		.items[title_msg_key] << fr
+	_endif
+
+	# Position at center of Dialog Designer frame.
+	fr.position << _self.top_frame.bounds.centre - pixel_coordinate(120,56)
+
+	fr.activate()
+	fr.actual.always_visible? << _true 
+_endmethod
+$
+
+
+_pragma(classify_level=restricted, usage={redefinable})
+_method dialog_designer.dd_documentation()
+	## 
+	## Open the included documentation.
+
+	word << ole_client.createobject ("Word.Application")
+	docs << word.documents()
+
+	pth << sw_module_manager.module(:dialog_designer).full_directory +
+	       "/Dialog Designer v1-5.doc"
+	pth << system.windows_short_pathname(pth)
+
+	_if system.file_exists?(pth)
+	_then
+		_try
+			word.visible << _true
+			docs.open(pth)	
+		_when error
+			_self.show_alert(_self.message(:bad_word_launch,pth))	
+		_endtry
+	_else
+		_self.show_alert(_self.message(:missing_documentation_file,pth))
+	_endif
+
+	docs.release_object()
+	word.release_object()
+_endmethod
+$
